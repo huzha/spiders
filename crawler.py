@@ -1,8 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-import lxml
 import csv
-import sys
 import threading
 
 
@@ -13,9 +11,9 @@ class myThread(threading.Thread):
         self.ticker_list_address = ticker_list_address
 
     def run(self):
-        print "start:thread" + str(self.thread_num)
+        print("start:thread" + str(self.thread_num))
         multi_threads_crawl_and_save(self.thread_num, self.ticker_list_address)
-        print "end:thread" + str(self.thread_num)
+        print("end:thread" + str(self.thread_num))
 
 
 def multi_threads_crawl_and_save(thread_num, ticker_list_address):
@@ -25,7 +23,7 @@ def multi_threads_crawl_and_save(thread_num, ticker_list_address):
         reader = csv.reader(f)
         for row in reader:
             crawl_and_save(row[0], output)
-            print row[0]
+            print(row[0])
     finally:
         f.close()
         output.close()
@@ -44,7 +42,7 @@ def crawl_and_save(symbol, out):
             if count != 0:
                 out.write(',' + symbol)
                 out.write('\n')
-            count+=1
+            count += 1
 
 
 def main():
